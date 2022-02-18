@@ -1,17 +1,17 @@
 import { lazy, Suspense } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Navigation from './components/Navigation';
+import Navigation from 'components/Navigation';
 
 
 const AboutView = lazy(() =>
-  import('./views/AboutView/AboutViews' /* webpackChunkName: "about-view"*/),
+  import('views/AboutView' /* webpackChunkName: "about-view"*/),
 );
 const GlobalView = lazy(() =>
-  import('./views/GlobalView/GlobalView' /* webpackChunkName: "global-page"*/),
+  import('views/GlobalView' /* webpackChunkName: "global-page"*/),
 );
-const CountriesView = lazy(() =>
+const CountryView = lazy(() =>
   import(
-    './views/CountriesView/CountriesView' /* webpackChunkName: "countries-page"*/
+    'views/CountryView' /* webpackChunkName: "country-page"*/
   ),
 );
 
@@ -24,7 +24,7 @@ export default function App() {
         <Switch>
           <Route path="/about" exact component={AboutView} />
           <Route path="/global" exact component={GlobalView} />
-          <Route path="/countries" component={CountriesView} />
+          <Route path="/countries" component={CountryView} />
 
           <Redirect to="/about" />
         </Switch>
