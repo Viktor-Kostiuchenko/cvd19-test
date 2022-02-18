@@ -1,20 +1,28 @@
 import { useState, useEffect } from "react";
-import SearchForm from "components/SearchForm";
-import DayPicker from "components/DayPicker";
-import CountryHistogram from "components/CountryHistogram";
-import { fetchStatsByCountry } from "services/api";
-import { useLocalStorage } from "hooks/useLocalStorage";
+import SearchForm from "../../components/SearchForm";
+import DayPicker from "../../components/DayPicker";
+import CountryHistogram from "../../components/CountryHistogram";
+import Section from "../../components/Section";
+import { fetchStatsByCountry } from "../../services/api";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+
+interface ConvertedResProps {
+  Date: string;
+  Confirmed: number;
+  Deaths: number;
+  Active: number;
+}
 
 export default function CountryView() {
   const [country, setCountry] = useLocalStorage("country", "Ukraine");
   const [fromDate, setFromDate] = useLocalStorage("fromDate", "");
   const [covidData, setCovidData] = useState([]);
 
-  const getCountryName = (query) => {
+  const getCountryName = (query: string) => {
     setCountry(query);
   };
 
-  const getCountryFromDate = (query) => {
+  const getCountryFromDate = (query: Date) => {
     setFromDate(query);
   };
 
@@ -25,10 +33,14 @@ export default function CountryView() {
 
     const asyncFetch = async () => {
       const result = await fetchStatsByCountry(country, fromDate.toISOString());
+
       const convertedData = result.reduce(
-        (acc, { Date, Confirmed, Deaths, Active }) => {
+        (
+          acc: any[],
+          { Date, Confirmed, Deaths, Active }: ConvertedResProps
+        ) => {
           Date = Date.substring(5, 10);
-          const day = acc.find((el) => el.Date === Date);
+          const day = acc.find((el: { Date: string }) => el.Date === Date);
           if (day) {
             day.Confirmed += Confirmed;
             day.Deaths += Deaths;
@@ -46,17 +58,18 @@ export default function CountryView() {
   }, [country, fromDate]);
 
   return (
-    <div style={{ padding: "20px 100px 20px 200px" }}>
-      <h2>This is countries view</h2>
-      <SearchForm getCountryName={getCountryName} searchedCountry={country} />
+    <Section title="Сountry statistics">
+      <div className="searchForm">
 
-      <DayPicker
-        getDate={getCountryFromDate}
-        currentDate={fromDate}
-        title={"From"}
-      />
+        <DayPicker
+          getDate={getCountryFromDate}
+          currentDate={fromDate}
+          title={"After"}
+        />
+      <SearchForm getCountryName={getCountryName} searchedCountry={country} />
+      </div>
 
       {covidData.length && <CountryHistogram data={covidData} />}
-    </div>
+    </Section>
   );
 }

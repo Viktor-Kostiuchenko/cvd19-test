@@ -1,6 +1,16 @@
 import { Legend, Tooltip, BarChart, Bar, YAxis, XAxis } from "recharts";
 
-export default function CountryHistogram({ data }) {
+type Option = {
+  Date: string, 
+  Confirmed: number, 
+  Deaths: number, 
+  Active: number
+}
+interface HistogramProps {
+  data: Option[]
+}
+
+export default function CountryHistogram({ data }: HistogramProps ) {
   return (
     <BarChart width={800} height={500} data={data}>
       <XAxis dataKey="Date" />

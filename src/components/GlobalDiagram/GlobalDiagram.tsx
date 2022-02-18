@@ -8,7 +8,16 @@ import {
   Area,
 } from "recharts";
 
-export default function GlobalDiagram({ data }) {
+type Option = {
+  Date: string, 
+  NewConfirmed: number, 
+
+}
+interface DiagramProps {
+  data: Option[]
+}
+
+export default function GlobalDiagram({ data } : DiagramProps) {
   return (
     <ResponsiveContainer width="100%" height={400}>
       <AreaChart data={data}>

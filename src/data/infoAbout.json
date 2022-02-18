@@ -1,0 +1,38 @@
+[
+  {
+    "id":1,
+    "title": "Strengthen your immune system and watch out your physical condition",
+    "descr": "Good food, sound sleep, exercise and fluid balance will help you stay healthy.",
+    "path": "https://img.icons8.com/ios/50/000000/strength.png"
+  },
+  {
+    "id":2,
+    "title": "Consult with your family doctor in time",
+    "descr": "Once you have noticed first symptoms of acute respiratory viral infection, consult with your family doctor.",
+    "path": "https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/64/000000/external-doctor-dental-kiranshastry-lineal-kiranshastry.png"
+  },
+  {
+    "id":3,
+    "title": "Wash your hands with soap for 20 seconds",
+    "descr": "or use a hand sanitizer that contains at least 60% -80% alcohol",
+    "path": "https://img.icons8.com/ios/50/000000/wash-your-hands--v1.png"
+  },
+  {
+    "id":4,
+    "title": "Avoid contacts with people who have acute respiratory viral infection related symptoms",
+    "descr": "or cold related symptoms.",
+    "path": "https://img.icons8.com/external-vitaliy-gorbachev-lineal-vitaly-gorbachev/60/000000/external-virus-coronavirus-vitaliy-gorbachev-lineal-vitaly-gorbachev.png"
+  },
+  {
+    "id":5,
+    "title": "Avoid touching your face",
+    "descr": "Do not touch your eyes, nose and mouth with dirty hands.",
+    "path": "https://img.icons8.com/ios/50/000000/do-not-touch-your-face.png"
+  },
+  {
+    "id":6,
+    "title": "Eat thermally processed food",
+    "descr": "Do not eat raw meat, meat by-products and eggs.",
+    "path": "https://img.icons8.com/ios/50/000000/dining-room.png"
+  }
+]
