@@ -13,12 +13,11 @@ export const useLocalStorage = (key, defaultValue) => {
       return defaultValue;
     }
 
-    return new Date(localStorage.getItem(key));
+
+    return new Date(dataFromLS);
   });
 
-  useEffect(() => {
-    localStorage.setItem(key, state);
-  }, [key, state]);
+  useEffect(() => localStorage.setItem(key, state), [key, state]);
 
   return [state, setState];
 };

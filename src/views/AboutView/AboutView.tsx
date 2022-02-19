@@ -8,7 +8,7 @@ export default function AboutView() {
         {aboutInfo.map(({ id, title, descr, path }) => (
           <li key={id}>
             <div className="itemNumber">
-            <img src={path} alt="icon" width="25"/>
+            <img src={path} alt="icon" width="25" height="25"/>
             </div>
             <h4 className="itemTitle">{title}</h4>
             <p className="itemDescr">{descr}</p>
