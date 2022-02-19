@@ -3,7 +3,7 @@ import Section from "../../components/Section";
 
 export default function AboutView() {
   return (
-    <Section title="How to get protected from virus infection?">
+    <Section title="How to get protected from virus infection?" background="about">
       <ul className="list">
         {aboutInfo.map(({ id, title, descr, path }) => (
           <li key={id}>

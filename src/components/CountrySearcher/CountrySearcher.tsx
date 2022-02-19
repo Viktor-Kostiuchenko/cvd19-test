@@ -8,7 +8,7 @@ interface IFormProps {
   searchedCountry: string,
 }
 
-export default function SearchForm({ getCountryName, searchedCountry }: IFormProps) {
+export default function CountrySearcher({ getCountryName, searchedCountry }: IFormProps) {
   const [country, setCountry] = useState(searchedCountry);
 
   const searchByCountry = (e: React.FormEvent<HTMLFormElement>) => {
@@ -20,7 +20,6 @@ export default function SearchForm({ getCountryName, searchedCountry }: IFormPro
   };
 
   return (
-    <>
       <form onSubmit={searchByCountry} autoComplete="off">
 
         <TextField
@@ -65,6 +64,5 @@ export default function SearchForm({ getCountryName, searchedCountry }: IFormPro
           Search info
         </Button>
       </form>
-    </>
   );
 }

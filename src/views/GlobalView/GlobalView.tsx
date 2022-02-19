@@ -68,7 +68,7 @@ export default function GlobalView() {
   }, [startDate, endDate]);
 
   return (
-    <Section title="Global statistics">
+    <Section title="Global statistics" background="global">
       <div className="datePickerBox">
         <DayPicker
           getDate={getStartDate}
