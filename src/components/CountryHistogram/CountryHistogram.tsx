@@ -6,13 +6,13 @@ type Option = {
   Deaths: number, 
   Active: number
 }
-interface HistogramProps {
+interface IHistogramProps {
   data: Option[]
 }
 
-export default function CountryHistogram({ data }: HistogramProps ) {
+export default function CountryHistogram({ data }: IHistogramProps ) {
   return (
-    <BarChart width={800} height={500} data={data}>
+    <BarChart width={800} height={400} data={data}>
       <XAxis dataKey="Date" />
       <YAxis />
       <Bar dataKey="Confirmed" stackId="a" barSize={30} fill="#2451B7" />

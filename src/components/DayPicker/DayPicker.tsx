@@ -1,13 +1,13 @@
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-interface PickerProps {
+interface IPickerProps {
   getDate(date: Date | null): void,
   currentDate: Date,
   title: string
 }
 
-export default function DayPicker({ getDate, currentDate, title }: PickerProps) {
+export default function DayPicker({ getDate, currentDate, title }: IPickerProps) {
   return (
     <div className="dataPickerWrapper">
       <p className="dataPickerTitle">{title}</p>

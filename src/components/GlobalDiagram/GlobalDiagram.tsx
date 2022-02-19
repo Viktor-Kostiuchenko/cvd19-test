@@ -13,11 +13,11 @@ type Option = {
   NewConfirmed: number, 
 
 }
-interface DiagramProps {
+interface IDiagramProps {
   data: Option[]
 }
 
-export default function GlobalDiagram({ data } : DiagramProps) {
+export default function GlobalDiagram({ data } : IDiagramProps) {
   return (
     <ResponsiveContainer width="100%" height={400}>
       <AreaChart data={data}>

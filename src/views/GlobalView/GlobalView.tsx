@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import DayPicker from '../../components/DayPicker';
 import GlobalDiagram from '../../components/GlobalDiagram';
 import Section from '../../components/Section';
@@ -6,17 +7,16 @@ import { fetchTotalGlobalStats } from '../../services/api';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 interface ISortedResProps {
-  Date: string,
-  NewConfirmed: number
+  Date: string;
+  NewConfirmed: number;
 }
+
+type CorrectDate = string | number;
 
 export default function GlobalView() {
   const [startDate, setStartDate] = useLocalStorage('startDate', '');
   const [endDate, setEndDate] = useLocalStorage('endDate', '');
   const [covidData, setCovidData] = useState([]);
-
-  console.log('before async', startDate)
-  // console.log(endDate)
 
   const getStartDate = (query: Date) => {
     setStartDate(query);
@@ -29,21 +29,23 @@ export default function GlobalView() {
   useEffect(() => {
     if (!startDate || !endDate) {
       return;
+    } else if (startDate >= endDate) {
+      toast.warning('Date "from" should be earlier than Date "to"');
+      return;
     }
 
     const asyncFetch = async () => {
-      // const formatedStartDate = startDate.toString().substring(5);
-      // const formatedEndDate = endDate.toString().substring(5, 10);
-      // console.log(formatedStartDate);
+      let start = new Date(startDate);
+      let end = new Date(endDate);
+      let correctStartDate: CorrectDate = start.setDate(start.getDate() + 1);
+      correctStartDate = new Date(correctStartDate).toISOString();
+      let correctEndDate: CorrectDate = end.setDate(end.getDate() + 1);
+      correctEndDate = new Date(correctEndDate).toISOString();
 
-      const result = await fetchTotalGlobalStats(startDate.toISOString(), endDate.toISOString());
-
-      // console.log(result)
-
-      if (result.length === 0) {
-        alert('No results');
-        return;
-      }
+      const result = await fetchTotalGlobalStats(
+        correctStartDate,
+        correctEndDate,
+      );
 
       const sortedResult = result
         .map(({ Date, NewConfirmed }: ISortedResProps) => {
@@ -60,8 +62,6 @@ export default function GlobalView() {
           return 0;
         });
 
-      // console.log(sortedResult);
-
       setCovidData(sortedResult);
     };
     asyncFetch();
@@ -70,7 +70,11 @@ export default function GlobalView() {
   return (
     <Section title="Global statistics">
       <div className="datePickerBox">
-        <DayPicker getDate={getStartDate} currentDate={startDate} title={'From'} />
+        <DayPicker
+          getDate={getStartDate}
+          currentDate={startDate}
+          title={'From'}
+        />
         <DayPicker getDate={getEndDate} currentDate={endDate} title={'To'} />
       </div>
       {startDate && <GlobalDiagram data={covidData} />}

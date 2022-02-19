@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { toast } from 'react-toastify';
 import SearchForm from "../../components/SearchForm";
 import DayPicker from "../../components/DayPicker";
 import CountryHistogram from "../../components/CountryHistogram";
@@ -34,6 +35,11 @@ export default function CountryView() {
     const asyncFetch = async () => {
       const result = await fetchStatsByCountry(country, fromDate.toISOString());
 
+      if (result.length === 0) {
+        toast.warning('Country name is wrong');
+        return;
+      }
+
       const convertedData = result.reduce(
         (
           acc: any[],
@@ -64,12 +70,12 @@ export default function CountryView() {
         <DayPicker
           getDate={getCountryFromDate}
           currentDate={fromDate}
-          title={"After"}
+          title={"From"}
         />
       <SearchForm getCountryName={getCountryName} searchedCountry={country} />
       </div>
 
-      {covidData.length && <CountryHistogram data={covidData} />}
+      {covidData.length !== 0 && <CountryHistogram data={covidData} />}
     </Section>
   );
 }

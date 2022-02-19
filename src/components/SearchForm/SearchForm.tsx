@@ -1,17 +1,21 @@
 import { useState } from "react";
+import { toast } from 'react-toastify';
 import { Button, TextField } from "@mui/material";
 import Search from "@mui/icons-material/Search";
 
-interface Props {
+interface IFormProps {
   getCountryName(country: string): void,
   searchedCountry: string,
 }
 
-export default function SearchForm({ getCountryName, searchedCountry }: Props) {
+export default function SearchForm({ getCountryName, searchedCountry }: IFormProps) {
   const [country, setCountry] = useState(searchedCountry);
 
   const searchByCountry = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if(!country) {
+      toast.warning('Country is not chosen');
+    }
     getCountryName(country);
   };
 
@@ -33,24 +37,21 @@ export default function SearchForm({ getCountryName, searchedCountry }: Props) {
             color: "#ffffff",
             '& .MuiOutlinedInput-input': {
               color: '#ffffff',
-              
-            },
-            '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#ffffff',
-            },
-            '&:hover': {
-              borderColor: '#red',
             },
             '& .MuiInputLabel-root': {
               color: '#ffffff',
             },
-            '& .MuiInputBase-root': {
-              height: '40px'
+            '& .MuiOutlinedInput-root': {
+              '& fieldset': {
+                borderColor: '#ffffff',
+              },
+              '&:hover fieldset': {
+                borderColor: '#1976d2',
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: '#1976d2',
+              },
             },
-            
-
-            // MuiInputBase-root-MuiOutlinedInput-root
-
           }}
         />
         <Button
@@ -58,7 +59,7 @@ export default function SearchForm({ getCountryName, searchedCountry }: Props) {
           type="submit"
           endIcon={<Search />}
           sx={{
-            height: "40px",
+            height: "56px",
           }}
         >
           Search info

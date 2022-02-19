@@ -1,35 +1,40 @@
-import { lazy, Suspense } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-import loadable from "@loadable/component";
-import Loader from "./components/Loader";
+import { lazy, Suspense } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import loadable from '@loadable/component';
+import Loader from './components/Loader';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Navigation = loadable(
-  () => import("./components/Navigation" /* webpackChunkName: "nav"*/)
+  () => import('./components/Navigation' /* webpackChunkName: "nav"*/),
 );
 const AboutView = lazy(
-  () => import("./views/AboutView" /* webpackChunkName: "about-view"*/)
+  () => import('./views/AboutView' /* webpackChunkName: "about-view"*/),
 );
 const GlobalView = lazy(
-  () => import("./views/GlobalView" /* webpackChunkName: "global-page"*/)
+  () => import('./views/GlobalView' /* webpackChunkName: "global-page"*/),
 );
 const CountryView = lazy(
-  () => import("./views/CountryView" /* webpackChunkName: "country-page"*/)
+  () => import('./views/CountryView' /* webpackChunkName: "country-page"*/),
+);
+const Footer = loadable(
+  () => import('./components/Footer' /* webpackChunkName: "footer"*/),
 );
 
 export default function App() {
   return (
     <>
+      <Navigation />
       <Suspense fallback={<Loader />}>
-        <Navigation />
-
         <Switch>
           <Route path="/about" exact component={AboutView} />
           <Route path="/global" exact component={GlobalView} />
           <Route path="/countries" component={CountryView} />
-
           <Redirect to="/about" />
         </Switch>
       </Suspense>
+      <Footer />
+      <ToastContainer />
     </>
   );
 }
