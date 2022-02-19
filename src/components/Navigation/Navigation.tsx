@@ -10,16 +10,19 @@ const itemsList = [
     text: 'Global',
     icon: <PublicIcon />,
     link: '/global',
+    exact: false
   },
   {
     text: 'Countries',
     icon: <FlagIcon />,
     link: '/countries',
+    exact: false
   },
   {
     text: 'About',
     icon: <InfoIcon />,
     link: '/',
+    exact: true
   },
 ];
 
@@ -35,11 +38,11 @@ export default function Navigation() {
     >
       <List>
         {itemsList.map((item, index) => {
-          const { text, icon, link } = item;
+          const { text, icon, link, exact } = item;
           return (
             <li key={index}>
               <NavLink
-                exact
+                exact={exact}
                 to={link}
                 className="navLink"
                 activeClassName="navActiveLink"
