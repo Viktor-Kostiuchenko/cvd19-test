@@ -19,7 +19,7 @@ const itemsList = [
   {
     text: 'About',
     icon: <InfoIcon />,
-    link: '/about',
+    link: '/',
   },
 ];
 
@@ -39,6 +39,7 @@ export default function Navigation() {
           return (
             <li key={index}>
               <NavLink
+                exact
                 to={link}
                 className="navLink"
                 activeClassName="navActiveLink"

@@ -27,10 +27,10 @@ export default function App() {
       <Navigation />
       <Suspense fallback={<Loader />}>
         <Switch>
+          <Route path="/" exact component={AboutView} />
           <Route path="/global" exact component={GlobalView} />
           <Route path="/countries" exact component={CountryView} />
-          <Route path="/about" exact component={AboutView} />
-          <Redirect from="/" to="/about" />
+          <Redirect to="/" />
         </Switch>
       </Suspense>
       <Footer />
