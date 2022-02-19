@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import DayPicker from '../../components/DayPicker';
 import GlobalDiagram from '../../components/GlobalDiagram';
 import Section from '../../components/Section';
 import { fetchTotalGlobalStats } from '../../services/api';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
+import formateDate from '../../helpers/formateDate';
 
 interface ISortedResProps {
   Date: string;
   NewConfirmed: number;
 }
-
-type CorrectDate = string | number;
 
 export default function GlobalView() {
   const [startDate, setStartDate] = useLocalStorage('startDate', '');
@@ -35,16 +34,11 @@ export default function GlobalView() {
     }
 
     const asyncFetch = async () => {
-      let start = new Date(startDate);
-      let end = new Date(endDate);
-      let correctStartDate: CorrectDate = start.setDate(start.getDate() + 1);
-      correctStartDate = new Date(correctStartDate).toISOString();
-      let correctEndDate: CorrectDate = end.setDate(end.getDate() + 1);
-      correctEndDate = new Date(correctEndDate).toISOString();
+      const [correctedStartDate, correctedEndDate] = formateDate(startDate, endDate)
 
       const result = await fetchTotalGlobalStats(
-        correctStartDate,
-        correctEndDate,
+        correctedStartDate,
+        correctedEndDate,
       );
 
       const sortedResult = result

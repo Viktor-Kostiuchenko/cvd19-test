@@ -15,7 +15,7 @@ export default function DayPicker({ getDate, currentDate, title }: IPickerProps)
         selected={currentDate}
         onChange={(date) => getDate(date)}
         dateFormat="yyyy-MM-dd"
-        maxDate={new Date(Date.now())}
+        maxDate={new Date(Date.now()-86400000)}
         className="datePicker"
       />
     </div>

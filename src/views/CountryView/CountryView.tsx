@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import CountrySearcher from "../../components/CountrySearcher";
-import DayPicker from "../../components/DayPicker";
-import CountryHistogram from "../../components/CountryHistogram";
-import Section from "../../components/Section";
-import { fetchStatsByCountry } from "../../services/api";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
+import CountrySearcher from '../../components/CountrySearcher';
+import DayPicker from '../../components/DayPicker';
+import CountryHistogram from '../../components/CountryHistogram';
+import Section from '../../components/Section';
+import { fetchStatsByCountry } from '../../services/api';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 interface ConvertedResProps {
   Date: string;
@@ -15,8 +15,8 @@ interface ConvertedResProps {
 }
 
 export default function CountryView() {
-  const [country, setCountry] = useLocalStorage("country", "Ukraine");
-  const [fromDate, setFromDate] = useLocalStorage("fromDate", "");
+  const [country, setCountry] = useLocalStorage('country', 'Ukraine');
+  const [fromDate, setFromDate] = useLocalStorage('fromDate', '');
   const [covidData, setCovidData] = useState([]);
 
   const getCountryName = (query: string) => {
@@ -35,7 +35,6 @@ export default function CountryView() {
     const asyncFetch = async () => {
       const result = await fetchStatsByCountry(country, fromDate.toISOString());
 
-      console.log(result)
       if (result.length === 0) {
         toast.warning('Country name is wrong');
         return;
@@ -44,7 +43,7 @@ export default function CountryView() {
       const convertedData = result.reduce(
         (
           acc: any[],
-          { Date, Confirmed, Deaths, Active }: ConvertedResProps
+          { Date, Confirmed, Deaths, Active }: ConvertedResProps,
         ) => {
           Date = Date.substring(5, 10);
           const day = acc.find((el: { Date: string }) => el.Date === Date);
@@ -56,7 +55,7 @@ export default function CountryView() {
           }
           return [...acc, { Date, Confirmed, Deaths, Active }];
         },
-        []
+        [],
       );
 
       setCovidData(convertedData);
@@ -70,9 +69,12 @@ export default function CountryView() {
         <DayPicker
           getDate={getCountryFromDate}
           currentDate={fromDate}
-          title={"From"}
+          title={'From'}
         />
-      <CountrySearcher getCountryName={getCountryName} searchedCountry={country} />
+        <CountrySearcher
+          getCountryName={getCountryName}
+          searchedCountry={country}
+        />
       </div>
 
       {covidData.length !== 0 && <CountryHistogram data={covidData} />}

@@ -6,18 +6,17 @@ import {
   ResponsiveContainer,
   AreaChart,
   Area,
-} from "recharts";
+} from 'recharts';
 
 type Option = {
-  Date: string, 
-  NewConfirmed: number, 
-
-}
+  Date: string;
+  NewConfirmed: number;
+};
 interface IDiagramProps {
-  data: Option[]
+  data: Option[];
 }
 
-export default function GlobalDiagram({ data } : IDiagramProps) {
+export default function GlobalDiagram({ data }: IDiagramProps) {
   return (
     <ResponsiveContainer width="100%" height={400}>
       <AreaChart data={data}>

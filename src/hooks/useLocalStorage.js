@@ -6,7 +6,7 @@ export const useLocalStorage = (key, defaultValue) => {
     const dataFromLS = localStorage.getItem(key);
 
     if (key === "country") {
-      return localStorage.getItem(key) ?? defaultValue;
+      return dataFromLS ?? defaultValue;
     }
 
     if (!dataFromLS) {
