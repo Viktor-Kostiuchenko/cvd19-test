@@ -6,10 +6,10 @@ import Section from '../../components/Section';
 import { fetchTotalGlobalStats } from '../../services/api';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import formateDate from '../../helpers/formateDate';
-import s from './GlobalView.module.scss'
+import s from './GlobalView.module.scss';
 
 interface ISortedResProps {
-  Date: string;
+  Date: Date | string;
   NewConfirmed: number;
 }
 
@@ -35,7 +35,10 @@ export default function GlobalView() {
     }
 
     const asyncFetch = async () => {
-      const [correctedStartDate, correctedEndDate] = formateDate(startDate, endDate)
+      const [correctedStartDate, correctedEndDate] = formateDate(
+        startDate,
+        endDate,
+      );
 
       const result = await fetchTotalGlobalStats(
         correctedStartDate,
@@ -43,11 +46,7 @@ export default function GlobalView() {
       );
 
       const sortedResult = result
-        .map(({ Date, NewConfirmed }: ISortedResProps) => {
-          Date = Date.substring(5, 10);
-          return { Date, NewConfirmed };
-        })
-        .sort((a: { Date: string }, b: { Date: string }) => {
+        .sort((a: { Date: Date }, b: { Date: Date }) => {
           if (a.Date > b.Date) {
             return 1;
           }
@@ -55,6 +54,10 @@ export default function GlobalView() {
             return -1;
           }
           return 0;
+        })
+        .map(({ Date, NewConfirmed }: ISortedResProps) => {
+          Date = Date.toString().substring(5, 10).replace('-', '/');
+          return { Date, NewConfirmed };
         });
 
       setCovidData(sortedResult);
