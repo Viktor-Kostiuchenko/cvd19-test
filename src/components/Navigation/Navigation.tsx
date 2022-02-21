@@ -4,6 +4,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InfoIcon from '@mui/icons-material/Info';
 import FlagIcon from '@mui/icons-material/Flag';
 import PublicIcon from '@mui/icons-material/Public';
+import s from './Navigation.module.scss'
 
 const itemsList = [
   {
@@ -32,7 +33,7 @@ export default function Navigation() {
       variant="permanent"
       sx={{
         '& .MuiDrawer-paper': {
-          backgroundColor: '#22272d',
+          backgroundColor: '#2a3038',
         },
       }}
     >
@@ -44,8 +45,8 @@ export default function Navigation() {
               <NavLink
                 exact={exact}
                 to={link}
-                className="navLink"
-                activeClassName="navActiveLink"
+                className={s.navLink}
+                activeClassName={s.navActiveLink}
               >
                 <ListItem button key={text}>
                   {icon && (

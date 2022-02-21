@@ -1,0 +1,30 @@
+.datePicker {
+  background-color: transparent;
+  border: 1px solid;
+  border-color: #ffffff;
+  border-radius: 4px;
+  color: #ffffff;
+  height: 54px;
+  padding-left: 14px;
+  font-size: 14px;
+}
+
+.datePicker:hover,
+.datePicker:focus-visible,
+.datePicker:focus{
+  border-color: #1976d2;
+}
+
+.dataPickerTitle {
+  font-size: 12px;
+  position: absolute;
+  background-color: #313e4c;
+  top: -8px;
+  left: 8px;
+  z-index: 2;
+  padding: 0 5px;
+}
+
+.dataPickerWrapper {
+  position: relative;
+}

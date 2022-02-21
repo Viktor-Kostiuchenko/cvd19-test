@@ -1,4 +1,5 @@
 import React from "react";
+import s from './Section.module.scss'
 
 interface ISection {
   title: string, 
@@ -8,8 +9,8 @@ interface ISection {
 
 export default function Section({ title, children, background }: ISection) {
   return (
-    <section className={`${background} section`}>
-      <h2 className="sectionTitle">{title}</h2>
+    <section className={`${s[background]} ${s.section}`}>
+      <h2 className={s.sectionTitle}>{title}</h2>
       {children}
     </section>
   );

@@ -6,6 +6,7 @@ import CountryHistogram from '../../components/CountryHistogram';
 import Section from '../../components/Section';
 import { fetchStatsByCountry } from '../../services/api';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
+import s from './CountryView.module.scss'
 
 interface ConvertedResProps {
   Date: string;
@@ -65,7 +66,7 @@ export default function CountryView() {
 
   return (
     <Section title={`${country} statistics`} background="global">
-      <div className="searchForm">
+      <div className={s.searcherBox}>
         <DayPicker
           getDate={getCountryFromDate}
           currentDate={fromDate}

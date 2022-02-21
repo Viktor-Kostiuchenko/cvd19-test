@@ -6,6 +6,7 @@ import Section from '../../components/Section';
 import { fetchTotalGlobalStats } from '../../services/api';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import formateDate from '../../helpers/formateDate';
+import s from './GlobalView.module.scss'
 
 interface ISortedResProps {
   Date: string;
@@ -63,7 +64,7 @@ export default function GlobalView() {
 
   return (
     <Section title="Global statistics" background="global">
-      <div className="datePickerBox">
+      <div className={s.datePickerBox}>
         <DayPicker
           getDate={getStartDate}
           currentDate={startDate}

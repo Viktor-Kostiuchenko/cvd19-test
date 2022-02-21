@@ -1,5 +1,6 @@
 import aboutInfo from '../../data/infoAbout.json';
 import Section from '../../components/Section';
+import s from './AboutView.module.scss'
 
 export default function AboutView() {
   return (
@@ -7,14 +8,14 @@ export default function AboutView() {
       title="How to get protected from virus infection?"
       background="about"
     >
-      <ul className="list">
+      <ul className={s.list}>
         {aboutInfo.map(({ id, title, descr, path }) => (
           <li key={id}>
-            <div className="itemNumber">
+            <div className={s.itemNumber}>
               <img src={path} alt="icon" width="25" height="25" />
             </div>
-            <h4 className="itemTitle">{title}</h4>
-            <p className="itemDescr">{descr}</p>
+            <h4 className={s.itemTitle}>{title}</h4>
+            <p className={s.itemDescr}>{descr}</p>
           </li>
         ))}
       </ul>
